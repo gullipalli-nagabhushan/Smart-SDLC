@@ -1,1 +1,14 @@
 backend/.env
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.env.bak
+*.env
+
+# VSCode settings
+.vscode/
