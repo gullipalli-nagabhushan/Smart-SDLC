@@ -13,6 +13,6 @@ def chat_with_bot(message):
     return post_text("/chat/chat", {"message": message})
 
 
-def submit_feedback(user, feedback):
-    return post_text("/feedback/submit", {"user": user, "feedback": feedback})
+def submit_feedback(uuid,user, feedback):
+    return post_text("/feedback/submit", {"uuid":uuid,"user": user, "feedback": feedback})
 
