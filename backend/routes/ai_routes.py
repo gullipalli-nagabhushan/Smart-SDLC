@@ -4,10 +4,16 @@ from services import ai_story_generator, code_generator, bug_resolver, doc_gener
 router = APIRouter()
 
 @router.post("/upload-pdf")
-def upload_pdf(file: UploadFile = File(...)):
-    text = ai_story_generator.extract_text_from_pdf(file)
-    result = ai_story_generator.classify_sdlc_phases(text)
-    return {"classified_tasks": result}
+async def upload_pdf(file: UploadFile = File(...)):
+    file_bytes = await file.read()  
+    text = ai_story_generator.extract_text_from_pdf(file_bytes)
+    classification = ai_story_generator.classify_sdlc_phases(text)
+    return {"classified_tasks": classification}
+
+# def upload_pdf(file: UploadFile = File(...)):
+#     text = ai_story_generator.extract_text_from_pdf(file)
+#     result = ai_story_generator.classify_sdlc_phases(text)
+#     return {"classified_tasks": result}
 
 @router.post("/generate-code")
 def generate_code(prompt: str = Form(...)):

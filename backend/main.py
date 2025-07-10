@@ -18,4 +18,4 @@ app.include_router(feedback_routes.router, prefix="/feedback")
 
 @app.get("/")
 def root():
-    return {"message": "SmartSDLC Backend Running"}
+    return {"message": "SmartSDLC Backend is running"}

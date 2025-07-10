@@ -5,15 +5,24 @@ from config import WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_MODEL_ID
 
 def get_iam_token():
     iam_url = "https://iam.cloud.ibm.com/identity/token"
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    data = f"grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey={WATSONX_API_KEY}"
-    print(data)
-    response = requests.post(iam_url, headers=headers, data=data)
-    if response.status_code != 200:
+    headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept": "application/json"
+    }
+
+    data = {
+        "grant_type": "urn:ibm:params:oauth:grant-type:apikey",
+        "apikey": WATSONX_API_KEY
+    }
+
+    try:
+        response = requests.post(iam_url, headers=headers, data=data)
+        response.raise_for_status()
+        return response.json().get("access_token")
+    
+    except requests.exceptions.RequestException as e:
         print("⚠️ Failed to get IAM token:", response.status_code, response.text)
         return None
-    
-    return response.json()["access_token"]
 
 def call_watsonx(prompt: str):
     token = get_iam_token()
@@ -31,7 +40,7 @@ def call_watsonx(prompt: str):
         "project_id": WATSONX_PROJECT_ID,
         "input": prompt,
         "parameters": {
-            "max_new_tokens": 200,
+            "max_new_tokens": 1000,
             "temperature": 0.7
         }
     }
