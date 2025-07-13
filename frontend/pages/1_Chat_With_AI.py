@@ -18,7 +18,7 @@ height = max(100, min(600, len(content.splitlines()) * 20))
 reply = {"success": False}
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.image(r"frontend\static\ai_sdlc.jpg", width=300)
+    st.image(r"frontend/static/ai_sdlc.jpg", width=300)
 
 with col2:
     with st.form("chat_form"):
