@@ -4,4 +4,6 @@ runOnSave = true
 
 [theme]
 base="dark"
-primaryColor="#1c3a70"
+primaryColor="#467cd0"
+backgroundColor="#01061c"
+secondaryBackgroundColor="#323850"

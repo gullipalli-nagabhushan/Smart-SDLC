@@ -1,15 +1,25 @@
 # backend/routers/auth_service.py
 
 from fastapi import  HTTPException
-from firebase_admin import credentials, auth, firestore, initialize_app
+from firebase_admin import credentials, auth as firebase_auth, firestore, initialize_app
 import firebase_admin
 
+
 # Initialize Firebase Admin once globally
-if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase_admin.json")
-    initialize_app(cred)
+try:
+    if not firebase_admin._apps:
+        cred = credentials.Certificate("firebase_admin.json")
+        initialize_app(cred)
+except Exception as e:
+    print("❌ Firebase initialization error:", e)
+    raise HTTPException(status_code=500, detail="Firebase initialization error")
+
 
 db = firestore.client()
+auth = firebase_auth
+print("✅ Firebase Admin(auth) & Firestore(db) initialized")
+print("----------------------------------------------------------------------------------")
+
 
 def verify_firebase_token(token: str):
     try:
@@ -37,3 +47,5 @@ def verify_firebase_token(token: str):
     except Exception as e:
         print("Token error:", e)
         raise HTTPException(status_code=401, detail="Invalid Firebase token")
+
+

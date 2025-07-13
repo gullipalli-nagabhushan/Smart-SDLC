@@ -3,31 +3,79 @@ import hashlib
 import os, urllib.parse
 from fastapi.responses import RedirectResponse
 from fastapi import APIRouter, Form, Request, FastAPI, Request, HTTPException
-from pydantic import BaseModel
 from config import BASE_URL,FRONTEND_URL, FIREBASE_PROJECT_ID, FIREBASE_API_KEY
-from services.auth_service import verify_firebase_token
-from models import user_model
+from services.auth_service import verify_firebase_token, auth, db
+from models.user_model import LoginUser,RegisterUser
 from models.token_payload_model import TokenPayload
+from mongoDB import users_collection as users
+from firebase_admin import firestore
 
-
-
-users = {}
 
 router = APIRouter()
 
-
 @router.post("/register")
-def register_user(username: str = Form(...), password: str = Form(...)):
-    if username in users:
-        return {"error": "User already exists"}
-    users[username] = hashlib.sha256(password.encode()).hexdigest()
-    return {"status": "Registered successfully"}
+def register_user(user: RegisterUser):
+    print("----------------------------------------------------------------------------------")
+    try:
+        # Create user in Firebase Authentication
+        user_record = auth.create_user(
+            email=user.email,
+            password=user.password,
+            display_name=user.name,
+        )
+        uid = user_record.uid
+        print("✅ User registered successfully at Firebase Auth")
+        # Store additional user details in Firestore
+        password = user.password
+        hash_password = hashlib.sha256(password.encode()).hexdigest()
+        user_data = {
+            "uid": uid,
+            "provider": "email",
+            "password": hash_password,
+            "name": user.name,
+            "email": user.email,
+            "createdAt": firestore.SERVER_TIMESTAMP,
+            "lastLogin": firestore.SERVER_TIMESTAMP
+        }
+        db.collection("users").document(uid).set(user_data)
+        print("✅ User registered successfully at Firestore")
+        print("----------------------------------------------------------------------------------")
+        return {
+            "message": "User registered successfully",
+            "uid": uid,
+            "email": user.email,
+        }
+
+    except auth.EmailAlreadyExistsError:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Registration failed: {str(e)}")
+
+
+
 
 @router.post("/login")
-def login_user(username: str = Form(...), password: str = Form(...)):
-    if username not in users or users[username] != hashlib.sha256(password.encode()).hexdigest():
-        return {"error": "Invalid credentials"}
-    return {"status": "Login successful"}
+async def login_user(user: LoginUser):
+    email = user.email
+    password = user.password
+
+    # Query the Firestore users collection for a document with matching email
+    user_query = db.collection("users").where("email", "==", email).limit(1).stream()
+
+    user_doc = next(user_query, None)
+
+    if not user_doc:
+        raise HTTPException(status_code=404, detail="User not found, Please Signup first")
+
+    user_data = user_doc.to_dict()
+    hashed_input_password = hashlib.sha256(password.encode()).hexdigest()
+
+    if user_data["password"] != hashed_input_password:
+        raise HTTPException(status_code=401, detail="Incorrect password")
+
+    user_data.pop("password", None)  # Optional: remove password before sending
+    return {"message": "Login successful", "user": user_data}
 
 
 @router.post("/verify")
