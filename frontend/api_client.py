@@ -1,13 +1,10 @@
+import streamlit as st
 import requests
 from requests.exceptions import ConnectionError, Timeout, RequestException
-import dotenv
-import os
 
-dotenv.load_dotenv()
+BASE_URL = st.secrets["BASE_URL"]
 
-BASE_URL = os.getenv("BASE_URL")
 
-BASE_URL = "https://smart-sdlc-afr7.onrender.com/"
 
 def post_file(endpoint, file):
     return requests.post(f"{BASE_URL}{endpoint}", files={"file": file})
