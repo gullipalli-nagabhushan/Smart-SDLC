@@ -16,7 +16,7 @@ if st.button("Generate Code"):
             st.stop()
         response = post_text("/ai/generate-code", {"prompt": prompt})
         print(response)
-        st.markdown(response.json().get("code", "No code generated"))
+        st.markdown(response["response"])
     else:
         st.warning("what do you want to code,write something about it ?")
    

@@ -1,29 +1,52 @@
 import requests
+from requests.exceptions import ConnectionError, Timeout, RequestException
+import dotenv
+import os
 
-BASE_URL = "http://127.0.0.1:8000"
+dotenv.load_dotenv()
+
+BASE_URL = os.getenv("BASE_URL")
+
+BASE_URL = "https://smart-sdlc-afr7.onrender.com/"
 
 def post_file(endpoint, file):
     return requests.post(f"{BASE_URL}{endpoint}", files={"file": file})
 
 def post_text(endpoint, data):
-    return requests.post(f"{BASE_URL}{endpoint}", data=data)
+    try:
+        response = requests.post(f"{BASE_URL}{endpoint}", data=data)
+
+        response.raise_for_status()  # Raise HTTPError for 4xx/5xx responses
+        print("✅ Success:", response.json())
+        if response.status_code == 200:
+            return {
+                "success": True,
+                "response": response.json().get("response", "No response")
+            }
+        else:
+            return {
+                "success": False,
+                "status_code": response.status_code,
+                "error": response.text
+            }
+
+    except ConnectionError:
+        print("❌ Connection Error: Could not connect to the server. Check your internet or server URL.")
+    except Timeout:
+        print("❌ Timeout Error: The request took too long to complete.")
+    except RequestException as e:
+        print("❌ Request Error:", str(e))
+    except Exception as e:
+        print("❌ Unexpected Error:", str(e))
+
+    
 
 def post_json(endpoint, json):
     print(json)
     return requests.post(f"{BASE_URL}{endpoint}", json=json, headers={"Content-Type": "application/json"})
 def chat_with_bot(message):
     response = post_text("/chat/chat", {"message": message})
-    if response.status_code == 200:
-        return {
-            "success": True,
-            "response": response.json().get("response", "No response")
-        }
-    else:
-        return {
-            "success": False,
-            "status_code": response.status_code,
-            "error": response.text
-        }
+    return response
     
 
 

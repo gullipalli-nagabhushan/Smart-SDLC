@@ -22,7 +22,7 @@ if "idToken" in query_params:
 
 
 if "user" in st.session_state:
-    st.success(f"Welcome {st.session_state.user['email']}")
+    st.success(f"Welcome {st.session_state.user['name'].capitalize()} 👋")
     st.write("✅ You are now on the Smart SDLC dashboard.")
   
     
@@ -61,8 +61,6 @@ with col2:
                     st.success(result["message"])
                     st.session_state.user = result["user"] 
                     st.session_state.logged_in = True
-                    st.markdown("### 👤 User Data:")
-                    st.code(json.dumps(result["user"], indent=2), language="json")
                 else:
                     st.error(result["message"])
                     if "details" in result:
@@ -84,7 +82,8 @@ with col2:
                         st.success(response["message"])
                         result = login(signup_email, signup_password)
                         st.session_state.user = result["user"] 
-                        st.session_state.logged_in = True                           
+                        st.session_state.logged_in = True  
+                        st.markdown("### 👤 User Data:")
                         st.code(json.dumps(result["user"], indent=2), language="json")
                     else:
                         if "details" in response:
