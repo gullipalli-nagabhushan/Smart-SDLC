@@ -41,7 +41,7 @@ st.title("Smart SDLC")
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.image(r"frontend/static/Smart_SDLC.png", use_container_width=True)
+    st.image(r"static/Smart_SDLC.png", use_container_width=True)
 
 with col2:
     st.header("Login or Sign Up")
