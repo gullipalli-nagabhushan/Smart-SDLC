@@ -12,13 +12,13 @@ def post_file(endpoint, file):
 def post_text(endpoint, data):
     try:
         response = requests.post(f"{BASE_URL}{endpoint}", data=data)
+        print("✅ Success:", response.json())
 
         response.raise_for_status()  # Raise HTTPError for 4xx/5xx responses
-        print("✅ Success:", response.json())
         if response.status_code == 200:
             return {
                 "success": True,
-                "response": response.json().get("response", "No response")
+                "response": response.json()
             }
         else:
             return {

@@ -49,7 +49,7 @@ def call_watsonx(prompt: str):
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
         result = response.json()
-
+        print("✅ Watsonx API Response:", result)
         # Updated parsing based on current Watsonx output
         if "results" in result and isinstance(result["results"], list):
             return result["results"][0].get("generated_text", "[No Generated Text]")

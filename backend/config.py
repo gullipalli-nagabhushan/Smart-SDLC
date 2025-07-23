@@ -20,7 +20,7 @@ FRONTEND_URL        = os.getenv("FRONTEND_URL")
 print("----------------------------------------------------------------------------------")
 print("Loading Config...")
 print("✅ Config Loaded - secret keys hidden")
-# print(WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_MODEL_ID) # Debugging Purpose
+print(WATSONX_API_KEY, WATSONX_PROJECT_ID, WATSONX_MODEL_ID) # Debugging Purpose
 # print(MONGO_DB_USERNAME, MONGO_DB_PASSWORD, MONGO_DB_URI)
 # print(FIREBASE_API_KEY, FIREBASE_PROJECT_ID)
 # print(BASE_URL, FRONTEND_URL)

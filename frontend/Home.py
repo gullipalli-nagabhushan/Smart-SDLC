@@ -94,17 +94,11 @@ with col2:
                     st.error("Failed to create user. Ensure password has 6+ characters.")  
             else:
                 st.error("Please enter email and password.")
+    if st.session_state.logged_in:
+        st.write(f"You are already logged in  !")
 
-    st.markdown("## Or ")
-    
-    if not st.session_state.logged_in:
-        st.markdown("""
-        <a href="https://gullipalli-nagabhushan.github.io/OAuth/auth.html" target="_self">
-            <button style="background-color: #00000B; border:1px solid gray; border-radius: 5px; color: white; padding:10px 20px; font-size:20px;">🔐 Continue with Google or GitHub</button>
-        </a>
-        """, unsafe_allow_html=True)
-    else:
-        st.success("You are already logged in.")
+
+
 
 st.markdown("""
 # 🚀 SmartSDLC: AI-powered Software Development Lifecycle Assistant
