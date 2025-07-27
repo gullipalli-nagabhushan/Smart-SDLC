@@ -100,9 +100,10 @@ with col2:
     if st.session_state.logged_in:
         st.write(f"You are already logged in  !")
     else:
+        st.warning("Please log in to continue.")
         # Button to trigger redirect
-        st.link_button("Continue with Google", f"{BASE_URL}/auth/google")
-        st.link_button("Continue with GitHub", f"{BASE_URL}/auth/github")
+        # st.link_button("Continue with Google", f"{BASE_URL}/auth/google")
+        # st.link_button("Continue with GitHub", f"{BASE_URL}/auth/github")
 
 
 st.markdown("""
