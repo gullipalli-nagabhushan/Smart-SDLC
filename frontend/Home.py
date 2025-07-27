@@ -105,8 +105,8 @@ with col2:
                 st.error("Please enter email and password.")
     if st.session_state.logged_in:
         st.write(f"You are already logged in  !")
-    else:
-        st.warning("Please log in to continue.")
+    # else:
+    #     st.warning("Please log in to continue.")
         # Button to trigger redirect
         # st.link_button("Continue with Google", f"{BASE_URL}/auth/google")
         # st.link_button("Continue with GitHub", f"{BASE_URL}/auth/github")
@@ -137,10 +137,10 @@ This web application helps students, developers, and teams build better software
 
 - **Frontend**: [Streamlit](https://streamlit.io/)
 - **Backend**: [FastAPI](https://fastapi.tiangolo.com/)
-- **AI Models**: IBM Watsonx.ai, LangChain
+- **AI Models**: IBM Watsonx.ai
 - **Database**: Firebase Firestore, MongoDB
 - **Auth**: Firebase Authentication
-- **CI/CD & Deployment**: GitHub + Cloud
+- **CI/CD & Deployment**: GitHub + Streamlit Cloud + Render
 
 ---
 

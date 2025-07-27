@@ -37,7 +37,7 @@ with col2:
                 st.warning("what do you want to know,please write some thing...")
 st.markdown("---")
 if reply["success"]:
-    st.error("Query: " + query)
+    st.markdown("#### You: " + query)
     st.markdown(reply["response"].get("response", "No response is generated, please try again!"))
 
 
