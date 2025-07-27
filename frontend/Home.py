@@ -5,6 +5,9 @@ from urllib.parse import urlparse, parse_qs
 from api_client import login,register,verify_token
 import json
 
+
+BASE_URL = st.secrets["BASE_URL"]
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
@@ -96,8 +99,10 @@ with col2:
                 st.error("Please enter email and password.")
     if st.session_state.logged_in:
         st.write(f"You are already logged in  !")
-
-
+    else:
+        # Button to trigger redirect
+        st.link_button("Continue with Google", f"{BASE_URL}/auth/google")
+        st.link_button("Continue with GitHub", f"{BASE_URL}/auth/github")
 
 
 st.markdown("""
@@ -153,7 +158,4 @@ Visit my GitHub to explore the source code, raise issues, or contribute to this 
 
 Feel free to try out all features and simplify your software engineering process with **SmartSDLC**!
 """)
-
-   
-
-    
+  
