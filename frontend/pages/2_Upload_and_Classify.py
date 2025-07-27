@@ -16,6 +16,6 @@ if pdf_file:
     response = post_file("/ai/upload-pdf", pdf_file)
     if response.status_code == 200:
         st.success("PDF Processed Successfully")
-        st.json(response.json())
+        st.markdown(response.json().get("classified_tasks", "No tasks are classified, please try again!"))
     else:
         st.error("Failed to process PDF")

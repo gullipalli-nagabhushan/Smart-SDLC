@@ -17,6 +17,6 @@ if st.button("Summarize"):
             st.page_link("Home.py",label="Click here to Login")   
             st.stop()
         response = post_text("/ai/summarize-code", {"code": code_input})
-        st.markdown(response.get("summary", "No summary available"))
+        st.markdown(response["response"].get("summary", "No summary is generated, please try again!"))
     else:
         st.warning("Please provide your code.")

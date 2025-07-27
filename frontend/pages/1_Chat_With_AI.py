@@ -38,7 +38,7 @@ with col2:
 st.markdown("---")
 if reply["success"]:
     st.error("Query: " + query)
-    st.success("Response:"+ reply.get("response", "No response"))
+    st.markdown(reply["response"].get("response", "No response is generated, please try again!"))
 
 
 

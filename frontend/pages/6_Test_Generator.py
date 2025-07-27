@@ -13,7 +13,7 @@ if st.button("Generate Tests"):
             st.page_link("Home.py",label="Click here to Login") 
             st.stop()
         response = post_text("/ai/generate-tests", {"code": code})
-        st.code(response.get("tests", "No tests generated"))
+        st.markdown(response["response"].get("tests", "No test cases are generated, please try again!"))
     else:
         st.warning("Write the code, for which generate test cases")
 

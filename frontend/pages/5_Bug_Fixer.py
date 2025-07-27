@@ -16,6 +16,6 @@ if st.button("Fix Code"):
             st.page_link("Home.py",label="Click here to Login") 
             st.stop()
         response = post_text("/ai/fix-bugs", {"code": buggy_code})
-        st.markdown(response.get("fixed_code", "No fix suggested"))
+        st.markdown(response["response"].get("fixed_code", "No bugs  are fixed, please try again!"))
     else:
         st.warning("Write your buggy code")
