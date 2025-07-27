@@ -2,14 +2,20 @@ import streamlit as st
 import requests
 import streamlit.components.v1 as components
 from urllib.parse import urlparse, parse_qs
-from api_client import login,register,verify_token
+from api_client import login,register,verify_token,warm_up_backend
 import json
-
 
 BASE_URL = st.secrets["BASE_URL"]
 
+
+if "backend_ready" not in st.session_state:
+    st.session_state.backend_ready = False
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
+
+if not st.session_state.backend_ready:
+    st.session_state.backend_ready = warm_up_backend()
 
 query_params = st.query_params
 

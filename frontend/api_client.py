@@ -5,7 +5,15 @@ from requests.exceptions import ConnectionError, Timeout, RequestException
 BASE_URL = st.secrets["BASE_URL"]
 
 
-
+def warm_up_backend():
+    response = requests.get(f"{BASE_URL}/")  
+    if response.status_code == 200:
+        print("✅ Success:", response.json())
+        return True
+    else:
+        print("❌ Error:", response.status_code, response.text)
+        return False
+        
 def post_file(endpoint, file):
     return requests.post(f"{BASE_URL}{endpoint}", files={"file": file})
 
