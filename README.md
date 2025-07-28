@@ -20,7 +20,7 @@ SmartSDLC is an AI-powered web platform designed to enhance the software develop
 - Feedbacks are stored in MongoDB.
 
 ## 🌐 Live Demo
-👉 [https://smart-sdlc.streamlit.app/]
+👉[![Live Demo](https://img.shields.io/badge/Demo-Live-green?style=for-the-badge)](https://smart-sdlc.streamlit.app/)
 
 ## 🛠️ Technology Stack
 
