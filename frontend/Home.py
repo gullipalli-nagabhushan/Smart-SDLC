@@ -165,4 +165,5 @@ Feel free to try out all features and simplify your software engineering process
 
 if not st.session_state.backend_ready:
     st.session_state.backend_ready = warm_up_backend()
+    st.session_state.backend_ready = True
   
