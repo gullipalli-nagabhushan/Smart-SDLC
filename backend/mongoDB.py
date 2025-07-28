@@ -2,7 +2,6 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from pymongo.errors import ConfigurationError, ServerSelectionTimeoutError
 from pymongo import MongoClient
-from datetime import datetime
 from config import MONGO_DB_URI
 
 users_collection = None

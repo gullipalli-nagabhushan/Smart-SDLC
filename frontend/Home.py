@@ -89,9 +89,8 @@ with col2:
                         st.success(response["message"])
                         result = login(signup_email, signup_password)
                         st.session_state.user = result["user"] 
+                        print(st.session_state.user)
                         st.session_state.logged_in = True  
-                        st.markdown("### 👤 User Data:")
-                        st.code(json.dumps(result["user"], indent=2), language="json")
                     else:
                         if "details" in response:
                             st.error(response["details"])

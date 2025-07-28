@@ -56,8 +56,12 @@ def chat_with_bot(message):
 
 
 def submit_feedback(uuid,user, feedback):
-    return post_text("/feedback/submit", {"uuid":uuid,"user": user, "feedback": feedback})
-
+    response = post_text("/feedback/submit", {"uuid":uuid,"user": user, "feedback": feedback})
+    print(response)
+    if response["response"]["status"] == "Feedback recieved":
+        return True
+    else:
+        return False
 
 def register(name,email, password):
     response = post_json("/auth/register", {"name":name,"email": email, "password": password})

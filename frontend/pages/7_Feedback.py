@@ -11,8 +11,9 @@ feedback_text = st.text_area("Your Feedback", height=150)
 if st.button("Send Feedback"):
     if username.strip() and feedback_text.strip():
         if st.session_state.logged_in:
-            response = submit_feedback(st.session_state.user["localId"],username, feedback_text)
-            if response.status_code == 200:
+            print(st.session_state.user)
+            response = submit_feedback(st.session_state.user["uid"],username, feedback_text)
+            if response:
                 st.success("Feedback submitted successfully")
             else:
                 st.error("Error submitting feedback")
