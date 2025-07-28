@@ -36,28 +36,28 @@ SmartSDLC is an AI-powered web platform designed to enhance the software develop
 ## 🧑‍💻 Local Setup Instructions
 
 
-# 1. Clone the Repository
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/gullipali-nagabhushan/Smart-SDLC.git
 cd SmartSDLC
 ```
-# 2. Create and Activate a Virtual Environment
+### 2. Create and Activate a Virtual Environment
 ```bash
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 ```
-# 3. Install Backend Requirements
+### 3. Install Backend Requirements
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
-# 4. Create .env file for in your project folder and paste the content of [env_template.txt](./env_template.txt):
+### 4. Create .env file for in your project folder and paste the content of [env_template.txt](./env_template.txt):
 🔑 Replace  the  all  variables in file enclosed with <> by  your IBM Cloud , MongoDB and Firebase Credentials(api-keys,project-ids,..).
-# 5. Run FastAPI Server
+### 5. Run FastAPI Server
 ```bash
 uvicorn main:app --reload
 ```
-# 6. Run Frontend (in new terminal)
+### 6. Run Frontend (in new terminal)
 ```bash
 streamlit run frontend/Home.py
 ```
