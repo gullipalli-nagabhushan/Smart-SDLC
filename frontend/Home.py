@@ -14,8 +14,6 @@ if "backend_ready" not in st.session_state:
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
 
-if not st.session_state.backend_ready:
-    st.session_state.backend_ready = warm_up_backend()
 
 query_params = st.query_params
 
@@ -165,4 +163,8 @@ Visit my GitHub to explore the source code, raise issues, or contribute to this 
 
 Feel free to try out all features and simplify your software engineering process with **SmartSDLC**!
 """)
+
+
+if not st.session_state.backend_ready:
+    st.session_state.backend_ready = warm_up_backend()
   
