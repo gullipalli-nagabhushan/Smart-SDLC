@@ -27,3 +27,8 @@ pglite-debug.log
 
 # dataconnect 
 dataconnect/
+
+.devcontainer/
+
+
+.gitignore

@@ -121,13 +121,12 @@ This web application helps students, developers, and teams build better software
 ## 🔍 What You Can Do With SmartSDLC
 
 - 💬 **Chat with AI**: Ask development-related queries or brainstorm features with an integrated AI assistant.
-- 🧾 **Summarize Code**: Upload large codebases or modules and get clean summaries of logic and structure.
+- 🧾 **Summarize Code**: Upload the code and get clean summaries of logic and structure.
 - 🧑‍💻 **Code Generation**: Instantly generate boilerplate code, classes, or logic from natural language prompts.
 - 📄 **Task Classification**: Upload your **SRS document** and get tasks auto-classified by functional and non-functional requirements.
 - 🧪 **Test Case Generator**: Create test cases from descriptions, logic, or existing code to ensure better software testing.
 - 🐞 **Bug Fixer**: Upload broken code and let the AI identify and fix potential bugs.
 - 🔐 **Firebase Authentication**: Secure login and sign-up with Firebase Authentication and Firestore.
-- ☁️ **Cloud Storage & Retrieval**: Store your project state, task flow, and documents in MongoDB.(*Not available *)
 
 ---
 
@@ -157,7 +156,7 @@ This application is built especially for:
 
 Visit my GitHub to explore the source code, raise issues, or contribute to this project:
 
-👉 [GitHub Profile – Gullipalli Nagabhushan](https://github.com/gullipalli-nagabhushan)
+👉 [GitHub Repo](https://github.com/gullipalli-nagabhushan/Smart-SDLC)
 
 ---
 
