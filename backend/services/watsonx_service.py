@@ -40,8 +40,11 @@ def call_watsonx(prompt: str):
         "project_id": WATSONX_PROJECT_ID,
         "input": prompt,
         "parameters": {
-            "max_new_tokens": 1000,
-            "temperature": 0.7
+            "decoding_method": "greedy",
+            "max_new_tokens": 200,
+            "min_new_tokens": 0,
+            "repetition_penalty": 1,
+            "temperature": 0.6
         }
     }
 
